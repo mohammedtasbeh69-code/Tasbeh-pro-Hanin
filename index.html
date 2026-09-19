@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hanin Pro</title>
+<style>
+body{background:#0a1931;color:#fff;font-family:sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0;padding:10px}
+.card{background:#112240;border:2px solid #d4af37;border-radius:20px;padding:25px;text-align:center;width:100%;max-width:380px}
+h1{color:#d4af37}
+#count{font-size:50px;color:#d4af37;font-weight:bold;margin:10px}
+input{width:100%;padding:12px;border-radius:10px;border:1px solid #d4af37;background:#0a1931;color:#fff;text-align:center;margin:10px 0;box-sizing:border-box}
+button{background:#d4af37;color:#0a1931;border:none;padding:12px;border-radius:30px;width:100%;margin-top:10px;font-weight:bold;cursor:pointer}
+.btn2{background:transparent;border:1px solid #d4af37;color:#d4af37}
+.res{background:#fff;color:#0a1931;padding:15px;border-radius:10px;margin-top:15px;display:none}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>HANIN PRO</h1>
+<p>بواسطة حنين - 14 سنة</p>
+<div id="count">0</div>
+<input id="userName" placeholder="اكتبي اسمك هنا">
+<button onclick="c++;document.getElementById('count').innerText=c">سبحي</button>
+<button class="btn2" onclick="make()">✨ اصنعي كارت باسمك</button>
+<div id="res" class="res"><h3 id="t"></h3><p>جعلك الله من الذاكرات ❤️</p></div>
+<button id="dl" class="btn2" style="display:none;background:#fff" onclick="down()">📥 حملي الصورة</button>
+<canvas id="cv" style="display:none"></canvas>
+</div>
+<script>
+let c=0;
+function make(){
+let n=document.getElementById('userName').value;
+if(!n)return alert('اكتبي اسمك');
+document.getElementById('t').innerText='يا '+n+' سبحتِ '+c+' تسبيحة';
+document.getElementById('res').style.display='block';
+document.getElementById('dl').style.display='block';
+}
+function down(){
+let cv=document.getElementById('cv');
+let ctx=cv.getContext('2d');
+cv.width=1080;cv.height=1080;
+// خلفية
+ctx.fillStyle='#0a1931';ctx.fillRect(0,0,1080,1080);
+ctx.strokeStyle='#d4af37';ctx.lineWidth=15;ctx.strokeRect(20,20,1040,1040);
+// عنوان
+ctx.fillStyle='#d4af37';ctx.textAlign='center';
+ctx.font='bold 70px Arial';ctx.fillText('HANIN PRO',540,180);
+ctx.fillStyle='#fff';
+ctx.font='45px Arial';
+// النص في النص بالظبط عشان ما يتقصش
+let txt=document.getElementById('t').innerText;
+ctx.fillText(txt,540,450);
+ctx.font='38px Arial';
+ctx.fillText('جعلك الله من الذاكرات ❤️',540,550);
+ctx.font='28px Arial';ctx.fillStyle='#d4af37';
+ctx.fillText('Tasbeh-pro-Hanin.github.io',540,900);
+ctx.fillText('بواسطة حنين - 14 سنة - مصر',540,950);
+let a=document.createElement('a');
+a.download='hanin-tasbeh.png';
+a.href=cv.toDataURL('image/png');
+a.click();
+}
+</script>
+</body>
+</html>
